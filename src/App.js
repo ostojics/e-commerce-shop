@@ -1,8 +1,11 @@
+import Products from './Components/Products/Products';
+import Navbar from './Components/Navbar/Navbar';
 
 const App = () => {
     return (
         <div>
-            E-Commerce
+            <Navbar />
+            <Products />
         </div>
     )
 }
