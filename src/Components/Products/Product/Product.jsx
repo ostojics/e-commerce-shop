@@ -3,8 +3,8 @@ import { AddShoppingCart } from '@material-ui/icons';
 
 import useStyles from './Product-styles';
 
-const Product = ({ product }) => {
-    const { name, description, price, media } = product;
+const Product = ({ product, onAddToCart }) => {
+    const { id, name, description, price, media } = product;
 
     console.log(product);
 
@@ -22,11 +22,9 @@ const Product = ({ product }) => {
                         { price.formatted }
                     </Typography>
                 </div>
-                <Typography variant="body2" color="textSecondary">
-                    { description }
-                </Typography>
+                <Typography dangerouslySetInnerHTML={{ __html: description }} variant="body2" color="textSecondary" />
                 <CardActions disableSpacing className={ classes.cardActions }>
-                    <IconButton aria-label="Add to Cart">
+                    <IconButton aria-label="Add to Cart" onClick={ () => onAddToCart(id, 1) }>
                         <AddShoppingCart />
                     </IconButton>
                 </CardActions>
