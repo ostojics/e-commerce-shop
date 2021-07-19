@@ -1,6 +1,25 @@
 
 import ReactDom from 'react-dom';
 
+import { BrowserRouter } from 'react-router-dom';
+
 import App from './App';
 
-ReactDom.render(<App />, document.getElementById('root'));
+import CartContextProvider from './store/cart-context';
+import ProductsContextProvider from './store/products-context';
+
+const app = (
+    <BrowserRouter>
+        <CartContextProvider>
+        <ProductsContextProvider>
+            <App />
+        </ProductsContextProvider>
+        </CartContextProvider>
+    </BrowserRouter>
+
+)
+
+ReactDom.render(
+    app, 
+    document.getElementById('root')
+);
