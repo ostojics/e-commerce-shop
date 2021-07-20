@@ -41,7 +41,7 @@ const Cart = (props) => {
                         <Button className={ classes.emptyButton } onClick={ emptyCartHandler } size="large" type="button" variant="contained" color="secondary">
                             Empty Cart
                         </Button>
-                        <Button className={ classes.checkoutButton } size="large" type="button" variant="contained" color="primary">
+                        <Button component={Link} to='/checkout' className={ classes.checkoutButton } size="large" type="button" variant="contained" color="primary">
                             Checkout
                         </Button>
                     </div>
