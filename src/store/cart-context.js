@@ -37,12 +37,20 @@ const CartContextProvider = props => {
         setCart(cart);
     }
 
+    const fetchToken = async () => {
+        const { id } = await commerce.cart.retrieve();
+        const token = await commerce.checkout.generateToken(id, { type: 'cart' });
+
+        return token;
+    }
+
     useEffect(() => {
         fetchCart();
     }, [])
 
     const contextValue = {
         cart,
+        fetchToken,
         addToCartHandler,
         updateCartQuantityHandler,
         handleRemoveFromCart,

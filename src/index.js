@@ -7,13 +7,14 @@ import App from './App';
 
 import CartContextProvider from './store/cart-context';
 import ProductsContextProvider from './store/products-context';
+import CheckoutContextProvider from './store/checkout-context';
 
 const app = (
     <BrowserRouter>
         <CartContextProvider>
-        <ProductsContextProvider>
-            <App />
-        </ProductsContextProvider>
+            <ProductsContextProvider>
+                <App />
+            </ProductsContextProvider>
         </CartContextProvider>
     </BrowserRouter>
 

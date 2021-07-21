@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../../../store/cart-context';
 
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
@@ -7,12 +8,27 @@ import { Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider,
 
 import useStyles from './Checkout-styles';
 
-const steps = ['Shipping address', 'Payment details']
+const steps = ['Shipping address', 'Payment details'];
 
 const Checkout = () => {
+    const { fetchToken } = useContext(CartContext); 
     const [activeStep, setActiveStep] = useState(0);
-
+    const [checkoutToken, setCheckoutToken] = useState(null);
     const classes = useStyles();
+
+    useEffect(() => {
+        const generateToken = async () => {
+            try {
+                const token = await fetchToken();
+
+                setCheckoutToken(token);
+           } catch(error) {
+
+           }
+        }
+
+        generateToken();
+    }, []);
 
     const Confirmation = () => {
         <div>
@@ -20,9 +36,13 @@ const Checkout = () => {
         </div>
     }
 
+    const addressForm = (
+        checkoutToken ?  <AddressForm  checkoutToken={ checkoutToken } /> : <CircularProgress />
+    )
+
     const Form = () => activeStep === 0 
     ? (
-        <AddressForm />
+        addressForm
     ) : (
         <PaymentForm />
     )
