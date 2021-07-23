@@ -12,8 +12,6 @@ const Product = ({ product }) => {
 
     const { addToCartHandler } = useContext(CartContext);
 
-    console.log(product);
-
     const classes = useStyles();
 
     return (
