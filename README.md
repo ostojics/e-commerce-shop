@@ -16,7 +16,7 @@ Add the selected products to the cart, update the quantity, remove products from
 
 ## Note
 
-There is no actual payment on the website. For the credit card detals just press 4 and then 2 on your keyboard repeatedly until the credit card details have been populated.
+There is no actual payment on the website. For the credit card details just press 4 and then 2 on your keyboard repeatedly until the credit card details are populated.
 
 ## Available Scripts
 
