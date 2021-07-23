@@ -1,12 +1,17 @@
+import { useContext } from 'react';
 import { Typography, Button, Divider } from '@material-ui/core';
 import { Elements, CardElement, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+
+import { CartContext } from '../../store/cart-context';
 
 import Review from './Review';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const PaymentForm = ({ checkoutToken, backStep }) => {
+const PaymentForm = ({ checkoutToken, shippingData, backStep, nextStep }) => {
+    const { handleCaptureCheckout } = useContext(CartContext);
+
     const handleSubmit = async (event, elements, stripe) => {
         event.preventDefault();
 
@@ -21,11 +26,12 @@ const PaymentForm = ({ checkoutToken, backStep }) => {
         if(error) {
             console.log(error);
         } else {
-            /* const orderData = { 
+            console.log(shippingData);
+            const orderData = { 
                 line_items: checkoutToken.live.live_items,
                 customer: { 
                     firstname: shippingData.firstName,
-                    lastName: shippingData.lastName,
+                    lastname: shippingData.lastName,
                     email: shippingData.email,
                 },
                 shipping: { 
@@ -45,7 +51,10 @@ const PaymentForm = ({ checkoutToken, backStep }) => {
                         payment_method_id: paymentMethod.id
                     }
                 }
-            } */
+            }
+
+            handleCaptureCheckout(checkoutToken, orderData);
+            nextStep();
         }
     }
 

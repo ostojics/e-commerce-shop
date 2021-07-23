@@ -6,6 +6,8 @@ export const CartContext = createContext();
 
 const CartContextProvider = props => {
     const [cart, setCart] = useState({});
+    const [order, setOrder] = useState({});
+    const [errorMessage, setErrorMessage] = useState('');
 
     const fetchCart = async () => {
         const cartData = await commerce.cart.retrieve();
@@ -37,6 +39,24 @@ const CartContextProvider = props => {
         setCart(cart);
     }
 
+    const refreshCart = async () => {
+        const newCart = await commerce.cart.refresh();
+
+        setCart(newCart);
+    }
+
+    const handleCaptureCheckout = async (checkoutToken, newOrder) => {
+        console.log('executed');
+        try {
+            const incomingOrder = await commerce.checkout.capture(checkoutToken.id, newOrder);
+
+            setOrder(incomingOrder);
+            await refreshCart();
+        } catch (error) {
+            setErrorMessage(error.data.error.message);
+        }
+    }
+
     const fetchToken = async () => {
         const { id } = await commerce.cart.retrieve();
         const token = await commerce.checkout.generateToken(id, { type: 'cart' });
@@ -50,11 +70,14 @@ const CartContextProvider = props => {
 
     const contextValue = {
         cart,
+        order,
+        errorMessage,
         fetchToken,
         addToCartHandler,
         updateCartQuantityHandler,
         handleRemoveFromCart,
         emptyCartHandler,
+        handleCaptureCheckout
     }
 
     return (

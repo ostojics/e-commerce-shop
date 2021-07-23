@@ -70,12 +70,12 @@ const AddressForm = ({ checkoutToken, next }) => {
            <FormProvider { ...methods }>
                 <form onSubmit={ methods.handleSubmit((data) => next({ ...data, shippingCountry, shippingSubdivision, shippingOption })) }> 
                     <Grid container spacing={3}>
-                        <FormInput fieldName={ 'firstName' } label={ 'First Name' } />
-                        <FormInput fieldName={ 'lastName' } label={ 'Last Name' } />
-                        <FormInput fieldName={ 'address1' } label={ 'Address' } />
-                        <FormInput fieldName={ 'email' } label={ 'Email' } />
-                        <FormInput fieldName={ 'city' } label={ 'City' } />
-                        <FormInput fieldName={ 'zip' } label={ 'ZIP / Postal code' } />
+                        <FormInput fieldName= 'firstName' label= 'First Name' />
+                        <FormInput fieldName= 'lastName' label= 'Last Name' />
+                        <FormInput fieldName= 'address1' label= 'Address' />
+                        <FormInput fieldName= 'email' label= 'Email' />
+                        <FormInput fieldName= 'city' label= 'City' />
+                        <FormInput fieldName= 'zip' label= 'ZIP / Postal code' />
                         <Grid item xs={12} sm={6}>
                             <InputLabel>Shipping Country</InputLabel>
                             <Select value={shippingCountry} fullWidth onChange={ (event) => setShippingCountry(event.target.value) }>
