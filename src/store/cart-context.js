@@ -46,7 +46,6 @@ const CartContextProvider = props => {
     }
 
     const handleCaptureCheckout = async (checkoutToken, newOrder) => {
-        console.log('executed');
         try {
             const incomingOrder = await commerce.checkout.capture(checkoutToken.id, newOrder);
 
