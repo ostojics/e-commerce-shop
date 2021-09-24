@@ -1,6 +1,6 @@
 # E-Commerce Shop
 
-E-Commerce Shop where you can buy products
+E-Commerce Shop where you can buy products. Created for learning purposes.
 
 ## Technologies used
 
